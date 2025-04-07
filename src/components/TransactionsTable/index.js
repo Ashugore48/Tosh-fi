@@ -1,8 +1,11 @@
-import { Table } from "antd";
+import { Input, Radio, Select, Table } from "antd";
+import { Option } from "antd/es/mentions";
 import React, { use, useState } from "react";
-
+import "./styles.css";
 function TransactionsTable({ transactions }) {
   const [search, setSearch] = useState("");
+  const [typeFilter, setTypeFilter] = useState("");
+  const [sortKey, setSortKey] = useState("");
   const columns = [
     {
       title: "Name",
@@ -32,19 +35,56 @@ function TransactionsTable({ transactions }) {
   ];
   let filteredTransactions = transactions.filter(
     (item) =>
-      item.name.toLowerCase().includes(search.toLowerCase()) ||
-      item.tag.toLowerCase().includes(search.toLowerCase()) ||
-      item.type.toLowerCase().includes(search.toLowerCase())
+      (item.name.toLowerCase().includes(search.toLowerCase()) ||
+        item.tag.toLowerCase().includes(search.toLowerCase()) ||
+        item.type.toLowerCase().includes(search.toLowerCase())) &&
+      item.type.includes(typeFilter)
   );
+  let sortedTransactions = filteredTransactions.sort((a, b) => {
+    if (sortKey === "date") {
+      return new Date(a.date) - new Date(b.date);
+    } else if (sortKey === "amount") {
+      return a.amount - b.amount;
+    } else {
+      return 0;
+    }
+  });
   return (
     <>
-      <input
+      {/* <input
         value={search}
         type="text"
         placeholder="Search..."
         onChange={(e) => setSearch(e.target.value)}
+      /> */}
+      <Input
+        className="table-search"
+        value={search}
+        type="text"
+        placeholder="Basic usage"
+        onChange={(e) => setSearch(e.target.value)}
       />
-      <Table dataSource={filteredTransactions} columns={columns} />;
+      <Select
+        className="select-input"
+        onChange={(value) => setTypeFilter(value)}
+        value={typeFilter}
+        placeholder="Filter"
+        allowClear
+      >
+        <Option value="">All</Option>
+        <Option value="income">Income</Option>
+        <Option value="expense">Expense</Option>
+      </Select>
+      <Radio.Group
+        className="input-radio"
+        onChange={(e) => setSortKey(e.target.value)}
+        value={sortKey}
+      >
+        <Radio.Button value="">No Sort</Radio.Button>
+        <Radio.Button value="date">Sort by Date</Radio.Button>
+        <Radio.Button value="amount">Sort by Amount</Radio.Button>
+      </Radio.Group>
+      <Table dataSource={sortedTransactions} columns={columns} />;
     </>
   );
 }
