@@ -1,0 +1,23 @@
+.input-wrapper{
+    margin-bottom: 1.5rem;
+}
+
+.lable-input{
+    margin-bottom: 0.5rem;
+    text-transform: capitalize;
+    font-size: 1rem;
+}
+
+.custom-input{
+    border-width: 0;
+    border-bottom-width: 1px;
+    width: 100%;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.custom-input:focus{
+    outline: none;
+    border-bottom-width: 2px;
+    border-color: var(--theme);
+}
