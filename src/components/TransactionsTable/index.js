@@ -1,4 +1,4 @@
-import { Input, Radio, Select, Table } from "antd";
+import { Button, Input, Radio, Select, Table } from "antd";
 import { Option } from "antd/es/mentions";
 import React, { use, useState } from "react";
 import "./styles.css";
@@ -50,42 +50,75 @@ function TransactionsTable({ transactions }) {
     }
   });
   return (
-    <>
+    <div className="Transaction-flex">
       {/* <input
         value={search}
         type="text"
         placeholder="Search..."
         onChange={(e) => setSearch(e.target.value)}
       /> */}
-      <Input
-        className="table-search"
-        value={search}
-        type="text"
-        placeholder="Basic usage"
-        onChange={(e) => setSearch(e.target.value)}
+      <div className="input-flex">
+        <Input
+          className="table-search"
+          value={search}
+          type="text"
+          placeholder="Search by Name, Tag or Type..."
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <Select
+          className="select-input"
+          onChange={(value) => setTypeFilter(value)}
+          value={typeFilter}
+          placeholder="Filter"
+          allowClear
+        >
+          <Option value="">All</Option>
+          <Option value="income">Income</Option>
+          <Option value="expense">Expense</Option>
+        </Select>
+      </div>
+      <div className="radio-flex">
+        <Radio.Group
+          className="input-radio"
+          onChange={(e) => setSortKey(e.target.value)}
+          value={sortKey}
+        >
+          <Radio.Button value="">No Sort</Radio.Button>
+          <Radio.Button value="date">Sort by Date</Radio.Button>
+          <Radio.Button value="amount">Sort by Amount</Radio.Button>
+        </Radio.Group>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "1rem",
+            width: "400px",
+          }}
+        >
+          <Button className="btn">Export to CSV</Button>
+
+          {/* Label triggers hidden input */}
+          <label htmlFor="file-csv">
+            <Button className="btn btn-blue" type="primary">
+              Import from CSV
+            </Button>
+          </label>
+
+          <input
+            id="file-csv"
+            type="file"
+            accept=".csv"
+            required
+            style={{ display: "none" }}
+          />
+        </div>
+      </div>
+      <Table
+        className="transaction-table"
+        dataSource={sortedTransactions}
+        columns={columns}
       />
-      <Select
-        className="select-input"
-        onChange={(value) => setTypeFilter(value)}
-        value={typeFilter}
-        placeholder="Filter"
-        allowClear
-      >
-        <Option value="">All</Option>
-        <Option value="income">Income</Option>
-        <Option value="expense">Expense</Option>
-      </Select>
-      <Radio.Group
-        className="input-radio"
-        onChange={(e) => setSortKey(e.target.value)}
-        value={sortKey}
-      >
-        <Radio.Button value="">No Sort</Radio.Button>
-        <Radio.Button value="date">Sort by Date</Radio.Button>
-        <Radio.Button value="amount">Sort by Amount</Radio.Button>
-      </Radio.Group>
-      <Table dataSource={sortedTransactions} columns={columns} />;
-    </>
+    </div>
   );
 }
 

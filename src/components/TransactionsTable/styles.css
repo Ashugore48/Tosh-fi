@@ -1,3 +1,30 @@
 .table-search {
-  max-width: 400px;
+  max-width: 100%;
+}
+.select-input {
+  width: 200px;
+}
+
+.Transaction-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 2rem;
+}
+
+.input-flex {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.input-flex input {
+  font-family: "Montserrat", sans-serif !important;
+}
+
+.radio-flex {
+  display: flex;
+  align-items: center;
+  margin: 1rem auto;
+  justify-content: space-between;
 }

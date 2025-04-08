@@ -36,7 +36,7 @@ const Dashboard = () => {
   const onFinish = (values, type) => {
     const newTranscation = {
       type: type,
-      date: moment(values.date).format("yyyy-MM-DD"),
+      date: values.date.format("YYYY-MM-DD"),
       tag: values.tag,
       name: values.name,
       amount: parseFloat(values.amount),
@@ -64,7 +64,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchTransactions();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     calculateBalance();
