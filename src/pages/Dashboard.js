@@ -128,7 +128,11 @@ const Dashboard = () => {
             handleIncomeCancel={handleIncomeModalCancel}
             onFinish={onFinish}
           />
-          <TransactionsTable transactions={transactions} />
+          <TransactionsTable
+            transactions={transactions}
+            addTransaction={addTransaction}
+            fetchTransactions={fetchTransactions}
+          />
         </>
       )}
     </div>
