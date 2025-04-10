@@ -10,6 +10,7 @@
   flex-direction: column;
   gap: 6px;
   margin: 2rem;
+  margin-top: 4rem;
 }
 
 .input-flex {
@@ -25,6 +26,6 @@
 .radio-flex {
   display: flex;
   align-items: center;
-  margin: 1rem auto;
-  justify-content: space-between;
+  margin: 0.5rem auto;
+  justify-content: space-between !important;
 }

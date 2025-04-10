@@ -8,8 +8,10 @@ import { addDoc, collection, getDocs, query } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
-import moment from "moment";
 import TransactionsTable from "../components/TransactionsTable";
+import ChartComponent from "../components/Charts";
+import NoTransactions from "../components/NoTransaction";
+import About from "../components/About";
 
 const Dashboard = () => {
   const [transactions, setTransactions] = useState([]);
@@ -103,6 +105,9 @@ const Dashboard = () => {
     }
     setLoading(false);
   }
+  let sortedTransactions = transactions.sort((a, b) => {
+    return new Date(a.date) - new Date(b.date);
+  });
 
   return (
     <div>
@@ -128,11 +133,17 @@ const Dashboard = () => {
             handleIncomeCancel={handleIncomeModalCancel}
             onFinish={onFinish}
           />
+          {transactions.length == 0 ? (
+            <NoTransactions />
+          ) : (
+            <ChartComponent sortedTransactions={sortedTransactions} />
+          )}
           <TransactionsTable
             transactions={transactions}
             addTransaction={addTransaction}
             fetchTransactions={fetchTransactions}
           />
+          <About />
         </>
       )}
     </div>

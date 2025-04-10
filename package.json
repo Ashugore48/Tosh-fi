@@ -2,7 +2,17 @@
   "name": "tosh-fi",
   "version": "0.1.0",
   "private": true,
+  "description": "A cool React + Firebase project by Ashutosh 💥",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx"
+  },
   "dependencies": {
+    "@ant-design/charts": "^2.2.7",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
@@ -11,19 +21,17 @@
     "firebase": "^11.6.0",
     "moment": "^2.30.1",
     "papaparse": "^5.5.2",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-firebase-hooks": "^5.1.1",
     "react-router-dom": "^7.4.1",
     "react-scripts": "5.0.1",
     "react-toastify": "^11.0.5",
     "web-vitals": "^2.1.4"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.33.2"
   },
   "eslintConfig": {
     "extends": [
@@ -42,5 +50,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "keywords": [
+    "react",
+    "firebase",
+    "antd",
+    "charts",
+    "tosh-fi"
+  ],
+  "author": "Ashutosh",
+  "license": "MIT"
 }

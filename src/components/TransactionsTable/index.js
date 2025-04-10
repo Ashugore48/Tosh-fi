@@ -12,6 +12,7 @@ function TransactionsTable({
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [sortKey, setSortKey] = useState("");
+
   const columns = [
     {
       title: "Name",
@@ -168,12 +169,12 @@ function TransactionsTable({
             width: "400px",
           }}
         >
-          <Button className="btn" onClick={exportToCSV}>
+          <label className="btn " onClick={exportToCSV}>
             Export to CSV
-          </Button>
+          </label>
 
           {/* Label triggers hidden input */}
-          <label htmlFor="file-csv" className="btn">
+          <label htmlFor="file-csv" className="btn ">
             Import from CSV
           </label>
 

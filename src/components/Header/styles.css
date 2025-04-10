@@ -15,6 +15,7 @@
   font-weight: 500;
   color: var(--white);
   margin: 0;
+  cursor: pointer;
 }
 
 .link {
