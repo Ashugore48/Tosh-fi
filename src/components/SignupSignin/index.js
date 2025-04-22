@@ -232,7 +232,7 @@ function SignupSigninComponent() {
               style={{ cursor: "pointer" }}
               onClick={() => setLoginForm(!loginForm)}
             >
-              Or Don't have an account? Click here
+              Already have an account? Click here
             </p>
           </form>
         </div>

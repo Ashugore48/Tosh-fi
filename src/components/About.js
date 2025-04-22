@@ -38,7 +38,9 @@ const About = () => {
         </p>
         <p style={{ fontSize: "0.85rem", marginTop: "1rem" }}>
           📊 Side note: I write more bugs than code, but that’s
-          character-building. If the app breaks—shhh, it’s a feature.
+          character-building. If the app breaks—shhh, it’s a feature. PS: If
+          site did crash just remove everything from url and hit enter. And if
+          it still doesn't work, Please let me know.
         </p>
       </div>
       <Footer />

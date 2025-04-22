@@ -9,13 +9,18 @@ function Cards({
   totalBalance,
   showExpenseModal,
   showIncomeModal,
+  resetBalance,
 }) {
   return (
     <div>
       <Row className="my-row">
         <Card className="my-card" title="Current Balance">
           ₹{totalBalance}
-          <Button text={"Reset Balance"} blue={true}></Button>
+          <Button
+            text={"Reset Balance"}
+            blue={true}
+            onClick={resetBalance}
+          ></Button>
         </Card>
         <Card className="my-card" title="Total Income">
           ₹{income}

@@ -1,5 +1,5 @@
 import { Button, Input, Radio, Select, Table } from "antd";
-import { Option } from "antd/es/mentions";
+// import { Option } from "antd/es/mentions";
 import React, { use, useState } from "react";
 import "./styles.css";
 import Papa, { parse } from "papaparse";
@@ -9,6 +9,7 @@ function TransactionsTable({
   addTransaction,
   fetchTransactions,
 }) {
+  const { Option } = Select;
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [sortKey, setSortKey] = useState("");

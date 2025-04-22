@@ -4,7 +4,14 @@ import Cards from "../components/Cards";
 import { Modal } from "antd";
 import AddExpenseModal from "../components/Modals/addExpense";
 import AddIncomeModal from "../components/Modals/addIncome";
-import { addDoc, collection, getDocs, query } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  query,
+} from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
@@ -52,7 +59,7 @@ const Dashboard = () => {
         collection(db, `users/${user.uid}/transactions`),
         transaction
       );
-      console.log("Document written with ID: ", docRef.id);
+      // console.log("Document written with ID: ", docRef.id);
       toast.success("Transaction Added!");
       let newArr = transactions;
       newArr.push(transaction);
@@ -100,7 +107,7 @@ const Dashboard = () => {
         transactionsArray.push(doc.data());
       });
       setTransactions(transactionsArray);
-      console.log(transactionsArray);
+      // console.log(transactionsArray);
       toast.success("Transactions Fetched!");
     }
     setLoading(false);
@@ -108,6 +115,27 @@ const Dashboard = () => {
   let sortedTransactions = transactions.sort((a, b) => {
     return new Date(a.date) - new Date(b.date);
   });
+
+  async function resetBalance() {
+    try {
+      const querySnapshot = await getDocs(
+        collection(db, `users/${user.uid}/transactions`)
+      );
+
+      const deletePromises = querySnapshot.docs.map((docSnap) =>
+        deleteDoc(doc(db, `users/${user.uid}/transactions`, docSnap.id))
+      );
+
+      await Promise.all(deletePromises);
+
+      toast.success("All transactions deleted!");
+      setTransactions([]); // Clear local state too
+      calculateBalance(); // Recalculate (will probably be 0 now)
+    } catch (error) {
+      console.error("Error deleting transactions: ", error);
+      toast.error("Failed to delete all transactions.");
+    }
+  }
 
   return (
     <div>
@@ -122,6 +150,7 @@ const Dashboard = () => {
             totalBalance={totalBalance}
             showExpenseModal={showExpenseModal}
             showIncomeModal={showIncomeModal}
+            resetBalance={resetBalance}
           />
           <AddExpenseModal
             isExpenseModalVisible={isExpenseModalVisible}
